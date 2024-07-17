@@ -1,19 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   thread.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msloot <msloot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/13 17:52:51 by msloot            #+#    #+#             */
-/*   Updated: 2024/07/17 16:46:00 by msloot           ###   ########.fr       */
+/*   Created: 2024/07/17 15:54:44 by msloot            #+#    #+#             */
+/*   Updated: 2024/07/17 16:39:13 by msloot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	main(int argc, char *argv[])
+size_t	create_thread(size_t t_philo philo)
 {
-	if (argc != 5 && argc != 6)
-		return (ft_puterr("wrong amount of arguments, 4 or 5 are needed\n"), 1);
+	pthread_t	ober;
+	size_t		i;
+
+	i = 0;
+	pthread_create(ober, NULL, X, X);
+	while (i < philo->philo_amt)
+	{
+		pthread_create(philo[i].thread, NULL, X, philo[i]);
+		i++;
+	}
 }

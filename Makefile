@@ -6,7 +6,7 @@
 #    By: msloot <msloot@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 19:19:04 by msloot            #+#    #+#              #
-#    Updated: 2024/07/13 17:52:02 by msloot           ###   ########.fr        #
+#    Updated: 2024/07/17 16:39:53 by msloot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ SRC_PATH =	./src/
 OBJ_PATH =	./obj/
 INC =		./inc/
 
-SRC_NAME =	main.c \
+SRC_NAME =	main.c thread.c \
 
 # SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))
 SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosophers.h                                     :+:      :+:    :+:   */
+/*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msloot <msloot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/15 15:59:49 by msloot            #+#    #+#             */
-/*   Updated: 2024/07/13 17:54:08 by msloot           ###   ########.fr       */
+/*   Created: 2024/07/17 15:56:14 by msloot            #+#    #+#             */
+/*   Updated: 2024/07/17 16:36:08 by msloot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,24 @@
 # include <stdarg.h>
 # include <unistd.h>
 # include <stdio.h>
+# include <pthread.h>
+
+# define PHILO_MAX	200
+
+typedef struct s_philo
+{
+	pthread_t		tread;
+	size_t			meals_eaten;
+	size_t			last_meal;
+	size_t			die_time;
+	size_t			eat_time;
+	size_t			sleep_time;
+	size_t			start_time;
+	size_t			philo_amt;
+	size_t			meal_amt;
+	size_t			*dead;
+}					t_philo;
+
+size_t	create_thread(size_t philo_num);
 
 #endif
