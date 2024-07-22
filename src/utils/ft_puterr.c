@@ -6,11 +6,16 @@
 /*   By: msloot <msloot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 20:57:22 by msloot            #+#    #+#             */
-/*   Updated: 2024/07/17 16:45:27 by msloot           ###   ########.fr       */
+/*   Updated: 2024/07/22 17:10:30 by msloot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "philo.h"
+
+static ssize_t	ft_putstr_fd(const char *str, int fd)
+{
+	return (write(fd, str, ft_strlen(str)));
+}
 
 ssize_t	ft_puterr(const char *str)
 {

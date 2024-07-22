@@ -1,35 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   thread.c                                           :+:      :+:    :+:   */
+/*   ansi.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msloot <msloot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/17 15:54:44 by msloot            #+#    #+#             */
-/*   Updated: 2024/07/22 18:34:09 by msloot           ###   ########.fr       */
+/*   Created: 2024/03/10 21:13:45 by msloot            #+#    #+#             */
+/*   Updated: 2024/03/11 18:49:22 by msloot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#ifndef ANSI_H
+# define ANSI_H
 
-size_t	create_thread(t_arg *arg)
-{
-	t_philo	*philo_array; //malloc that
-	size_t	i;
+# define Y_RESET	"\033[0m"
 
-	i = 0;
-//	pthread_create(ober, NULL, X, X);
-	while (i < philo->philo_amt)
-	{
-		// init philo struct
-		pthread_create(philo[i].thread, NULL, running_philo, philo);
-		i++;
-	}
+# define Y_BOLD		"\033[1m"
+# define Y_ITALIC	"\033[3m"
 
-	// once once philo is dead, stop everything
-}
+# define Y_RED		"\033[31m"
+# define Y_MAG		"\033[35m"
 
-void	running_philo(t_philo *philo)
-{
-	ft_putstr("eat\n");
-}
+# define Y_B_RED	"\033[1;31m"
+# define Y_BI_RED	"\033[1;3;31m"
+
+# define Y_B_MAG	"\033[1;35m"
+# define Y_BI_MAG	"\033[1;3;35m"
+
+#endif

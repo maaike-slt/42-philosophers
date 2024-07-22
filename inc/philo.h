@@ -6,7 +6,7 @@
 /*   By: msloot <msloot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:56:14 by msloot            #+#    #+#             */
-/*   Updated: 2024/07/17 16:36:08 by msloot           ###   ########.fr       */
+/*   Updated: 2024/07/22 18:39:03 by msloot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,11 @@
 # include <stdio.h>
 # include <pthread.h>
 
+# include "ansi.h"
+
 # define PHILO_MAX	200
+
+// create t_arg struct
 
 typedef struct s_philo
 {
@@ -35,5 +39,8 @@ typedef struct s_philo
 }					t_philo;
 
 size_t	create_thread(size_t philo_num);
+
+ssize_t	ft_puterr(const char *str);
+size_t	ft_strlen(const char *str);
 
 #endif
