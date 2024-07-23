@@ -6,7 +6,7 @@
 #    By: msloot <msloot@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 19:19:04 by msloot            #+#    #+#              #
-#    Updated: 2024/07/22 17:15:03 by msloot           ###   ########.fr        #
+#    Updated: 2024/07/23 21:56:29 by msloot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ CC = 	cc
 RM = 	rm -rf
 
 CFLAGS =	-Wall -Werror -Wextra
-# CFLAGS +=	-g
+CFLAGS +=	-pthread
+CFLAGS +=	-g
 # CFLAGS +=	-fsanitize=address
 
 # **************************************************************************** #
@@ -46,7 +47,8 @@ OBJ_PATH =	./obj/
 INC =		./inc/
 
 SRC_NAME =	main.c thread.c \
-			utils/ft_puterr.c utils/ft_strlen.c \
+			utils/ft_puterr.c utils/ft_strlen.c utils/ft_aton.c \
+			utils/ft_isspace.c utils/ft_isdigit.c \
 
 # SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))
 SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))
@@ -84,13 +86,11 @@ $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 
 clean:
 	@$(RM) $(OBJ_PATH)
-	@$(MAKE) clean -C
 	@echo "$(B)cleared$(D)"
 
 fclean:		clean
 	@$(RM) $(NAME)
 	@$(RM) $(NAME)
-	@$(MAKE) fclean -C
 
 re:			fclean all
 

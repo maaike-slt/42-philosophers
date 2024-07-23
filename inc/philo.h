@@ -6,7 +6,7 @@
 /*   By: msloot <msloot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:56:14 by msloot            #+#    #+#             */
-/*   Updated: 2024/07/22 22:06:05 by msloot           ###   ########.fr       */
+/*   Updated: 2024/07/23 22:15:07 by msloot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,20 +31,30 @@ typedef struct s_arg
 	size_t			eat_time;
 	size_t			sleep_time;
 	ssize_t			meal_amt;
+	bool			max_meal;
 }					t_arg;
+
+typedef struct s_manager
+{
+	pthread_t		*thread_array;
+	struct s_philo	*philo_array;
+	bool			stop;
+}					t_manager;
 
 typedef struct s_philo
 {
-	pthread_t		*tread;
 	size_t			meals_eaten;
 	size_t			last_meal;
 	size_t			start_time;
-	bool			*dead;
+	t_manager		*manager;
 }					t_philo;
 
-size_t	create_thread(size_t philo_num);
+bool	create_thread(const t_arg *arg);
 
 ssize_t	ft_puterr(const char *str);
 size_t	ft_strlen(const char *str);
+ssize_t	ft_aton(const char *nptr);
+bool	ft_isdigit(char c);
+bool	ft_isspace(char c);
 
 #endif

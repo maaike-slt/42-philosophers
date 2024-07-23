@@ -1,23 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msloot <msloot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/22 17:13:41 by msloot            #+#    #+#             */
-/*   Updated: 2024/07/23 21:40:12 by msloot           ###   ########.fr       */
+/*   Created: 2024/07/23 21:27:50 by msloot            #+#    #+#             */
+/*   Updated: 2024/07/23 21:32:35 by msloot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
-
-size_t	ft_strlen(const char *str)
-{
-	size_t	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
+// set values with aton
+// check if values are negative or 0
+// return error if sleep_time and think_time combined are longer than time_between_meals
