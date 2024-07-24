@@ -6,7 +6,7 @@
 #    By: msloot <msloot@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 19:19:04 by msloot            #+#    #+#              #
-#    Updated: 2024/07/23 21:56:29 by msloot           ###   ########.fr        #
+#    Updated: 2024/07/24 22:20:39 by msloot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,9 +46,9 @@ SRC_PATH =	./src/
 OBJ_PATH =	./obj/
 INC =		./inc/
 
-SRC_NAME =	main.c thread.c \
+SRC_NAME =	main.c thread.c parse.c \
 			utils/ft_puterr.c utils/ft_strlen.c utils/ft_aton.c \
-			utils/ft_isspace.c utils/ft_isdigit.c \
+			utils/ft_isspace.c utils/ft_isdigit.c utils/ft_putstr_fd.c\
 
 # SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))
 SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))
