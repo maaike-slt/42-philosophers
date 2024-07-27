@@ -6,7 +6,7 @@
 /*   By: msloot <msloot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:56:14 by msloot            #+#    #+#             */
-/*   Updated: 2024/07/24 22:17:34 by msloot           ###   ########.fr       */
+/*   Updated: 2024/07/27 14:49:49 by msloot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdbool.h>
 # include <pthread.h>
 # include <stdlib.h>
+# include <sys/time.h>
 
 # include "ansi.h"
 
@@ -49,8 +50,9 @@ typedef struct s_philo
 	t_manager		*manager;
 }					t_philo;
 
-bool	create_thread(const t_arg *arg);
 bool	parse(int argc, char *argv[]);
+bool	create_thread(const t_arg *arg);
+void	running_philo(t_philo *philo, t_manager manager);
 
 ssize_t	ft_putstr_fd(const char *str, int fd);
 ssize_t	ft_puterr(const char *str);
@@ -58,5 +60,6 @@ size_t	ft_strlen(const char *str);
 ssize_t	ft_aton(const char *nptr);
 bool	ft_isdigit(char c);
 bool	ft_isspace(char c);
+size_t	get_current_time(void);
 
 #endif
