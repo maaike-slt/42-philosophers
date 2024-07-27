@@ -6,7 +6,7 @@
 /*   By: msloot <msloot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:54:44 by msloot            #+#    #+#             */
-/*   Updated: 2024/07/27 20:05:16 by msloot           ###   ########.fr       */
+/*   Updated: 2024/07/27 20:11:53 by msloot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,8 @@ bool	create_thread(const t_arg *arg)
 	manager.stop = false;
 	manager.thread_array = (pthread_t *)malloc(sizeof(pthread_t)
 			* arg->philo_amt);
-	printf("philo_amt: %zu\n", arg->philo_amt);
 	if (!manager.thread_array)
-	{
-		printf("hello yo\n");
 		return (false);
-	}
 	manager.philo_array = (t_philo *)malloc(sizeof(t_philo) * arg->philo_amt);
 	if (!manager.philo_array)
 		return (false);
