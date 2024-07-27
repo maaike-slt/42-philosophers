@@ -6,11 +6,23 @@
 /*   By: msloot <msloot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:54:44 by msloot            #+#    #+#             */
-/*   Updated: 2024/07/27 15:02:56 by msloot           ###   ########.fr       */
+/*   Updated: 2024/07/27 20:05:16 by msloot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+bool	create_philo(t_manager *manager, size_t i)
+{
+	manager->philo_array[i].manager = manager;
+	if (pthread_create(&(manager->thread_array[i]), NULL,
+			(void*)(void*)(running_philo), &(manager->philo_array[i])) != 0)
+	{
+		ft_puterr("an error occurred within pthread_create\n");
+		return (false);
+	}
+	return (true);
+}
 
 bool	create_thread(const t_arg *arg)
 {
@@ -18,19 +30,22 @@ bool	create_thread(const t_arg *arg)
 	t_manager	manager;
 
 	manager.stop = false;
-	manager.thread_array = (pthread_t *)malloc(sizeof(pthread_t) * arg->philo_amt);
+	manager.thread_array = (pthread_t *)malloc(sizeof(pthread_t)
+			* arg->philo_amt);
+	printf("philo_amt: %zu\n", arg->philo_amt);
 	if (!manager.thread_array)
+	{
+		printf("hello yo\n");
 		return (false);
+	}
 	manager.philo_array = (t_philo *)malloc(sizeof(t_philo) * arg->philo_amt);
 	if (!manager.philo_array)
 		return (false);
 	i = 0;
 	while (i < arg->philo_amt)
 	{
-		manager.philo_array[i].manager = &manager;
-		if (!pthread_create(&(manager.thread_array[i]), NULL,
-				(void*)(void*)(running_philo), &(manager.philo_array[i])))
-			ft_puterr("an error occurred within pthread_create\n");
+		if (!create_philo(&manager, i))
+			return (false);
 		i++;
 	}
 	while (!manager.stop)

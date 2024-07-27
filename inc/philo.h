@@ -6,7 +6,7 @@
 /*   By: msloot <msloot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:56:14 by msloot            #+#    #+#             */
-/*   Updated: 2024/07/27 14:49:49 by msloot           ###   ########.fr       */
+/*   Updated: 2024/07/27 19:19:46 by msloot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ typedef struct s_philo
 	t_manager		*manager;
 }					t_philo;
 
-bool	parse(int argc, char *argv[]);
+bool	parse(int argc, char *argv[], t_arg *arg);
 bool	create_thread(const t_arg *arg);
-void	running_philo(t_philo *philo, t_manager manager);
+void	running_philo(t_philo *philo);
 
 ssize_t	ft_putstr_fd(const char *str, int fd);
 ssize_t	ft_puterr(const char *str);
