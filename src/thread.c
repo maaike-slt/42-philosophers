@@ -6,15 +6,17 @@
 /*   By: msloot <msloot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:54:44 by msloot            #+#    #+#             */
-/*   Updated: 2024/07/27 20:11:53 by msloot           ###   ########.fr       */
+/*   Updated: 2024/07/28 14:26:31 by msloot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-bool	create_philo(t_manager *manager, size_t i)
+bool	create_philo(const t_arg *arg, t_manager *manager, size_t i)
 {
 	manager->philo_array[i].manager = manager;
+	manager->philo_array[i].arg = arg;
+	manager->philo_array[i].index = i;
 	if (pthread_create(&(manager->thread_array[i]), NULL,
 			(void*)(void*)(running_philo), &(manager->philo_array[i])) != 0)
 	{
@@ -40,7 +42,7 @@ bool	create_thread(const t_arg *arg)
 	i = 0;
 	while (i < arg->philo_amt)
 	{
-		if (!create_philo(&manager, i))
+		if (!create_philo(arg, &manager, i))
 			return (false);
 		i++;
 	}

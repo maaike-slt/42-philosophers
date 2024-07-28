@@ -6,7 +6,7 @@
 /*   By: msloot <msloot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:56:14 by msloot            #+#    #+#             */
-/*   Updated: 2024/07/27 19:19:46 by msloot           ###   ########.fr       */
+/*   Updated: 2024/07/28 14:36:14 by msloot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,11 @@ typedef struct s_manager
 
 typedef struct s_philo
 {
+	size_t			index;
 	size_t			meals_eaten;
 	size_t			last_meal;
 	size_t			start_time;
+	const t_arg		*arg;
 	t_manager		*manager;
 }					t_philo;
 
