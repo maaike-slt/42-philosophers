@@ -6,7 +6,7 @@
 /*   By: msloot <msloot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 14:24:47 by msloot            #+#    #+#             */
-/*   Updated: 2024/07/28 14:36:00 by msloot           ###   ########.fr       */
+/*   Updated: 2024/08/21 22:32:41 by msloot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,26 +23,57 @@ eat -> sleep -> think
 odd eats
 even thinks
 */
+
 inline bool	must_stop(t_philo *philo)
 {
-	if (philo->meals_eaten == 0)
+	if (philo->arg->max_meal && philo->meals_eaten >= philo->arg->meal_amt)
 		return (true);
 	if (get_current_time() - philo->last_meal > philo->arg->die_time)
-		return (philo->manager->stop = true);
-	return (philo->manager->stop = false);
+	{
+		philo->manager->stop = true;
+		return (true);
+	}
+	return (false);
+}
+
+static bool	philo_eat(t_philo *philo)
+{
+	if (must_stop(philo))
+		return (false);
+	printf("eat");
+	philo->meals_eaten++;
+	philo->last_meal = get_current_time();
+	return (true);
+}
+
+static bool	philo_sleep(t_philo *philo)
+{
+	if (must_stop(philo))
+		return (false);
+	printf("sleep");
+	return (true);
+}
+
+static bool	philo_think(t_philo *philo)
+{
+	if (must_stop(philo))
+		return (false);
+	printf("think");
+	return (true);
 }
 
 void	running_philo(t_philo *philo)
 {
-	// TODO: make a loop
-	// in the loop, you eat, sleep, think, ... over and over again
-	// before each action check if `philo->manager->stop == true`
 	philo->start_time = get_current_time();
 	philo->last_meal = get_current_time();
 	philo->meals_eaten = 0;
-	write(STDOUT_FILENO, "eat\n", 4);
-	philo->last_meal = get_current_time();
-	usleep(4200);
-	philo->meals_eaten++;
-	philo->manager->stop = true;
+	while (true)
+	{
+		if (!philo_eat(philo))
+			return ;
+		if (!philo_think(philo))
+			return ;
+		if (!philo_sleep(philo))
+			return ;
+	}
 }
