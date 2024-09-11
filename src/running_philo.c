@@ -6,7 +6,7 @@
 /*   By: msloot <msloot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 14:24:47 by msloot            #+#    #+#             */
-/*   Updated: 2024/08/23 19:37:25 by msloot           ###   ########.fr       */
+/*   Updated: 2024/09/11 21:57:18 by msloot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,17 @@ even thinks
 
 static inline bool	must_stop(t_philo *philo)
 {
-	
 	if (philo->manager->stop == true)
 		return (true);
 	if (philo->arg->max_meal && philo->meals_eaten >= philo->arg->meal_amt)
 		return (true);
 	if (get_current_time() - philo->last_meal > philo->arg->die_time)
 	{
-		printf("died\n");
 		philo->manager->stop = true;
+		ft_putstr_fd("died\n", STDOUT_FILENO);
 		return (true);
 	}
-	return (!philo->manager->stop);
+	return (philo->manager->stop);
 }
 
 static bool	philo_eat(t_philo *philo)
@@ -47,6 +46,7 @@ static bool	philo_eat(t_philo *philo)
 	ft_putstr_fd("eat\n", STDOUT_FILENO);
 	philo->meals_eaten++;
 	philo->last_meal = get_current_time();
+	ft_msleep(philo->arg->eat_time);
 	return (true);
 }
 
@@ -54,7 +54,8 @@ static bool	philo_sleep(t_philo *philo)
 {
 	if (must_stop(philo))
 		return (false);
-	printf("sleep\n");
+	ft_putstr_fd("sleep\n", STDOUT_FILENO);
+	ft_msleep(philo->arg->sleep_time);
 	return (true);
 }
 
@@ -62,7 +63,7 @@ static bool	philo_think(t_philo *philo)
 {
 	if (must_stop(philo))
 		return (false);
-	printf("think\n");
+	ft_putstr_fd("think\n", STDOUT_FILENO);
 	return (true);
 }
 
@@ -75,11 +76,11 @@ void	running_philo(t_philo *philo)
 	while (true)
 	{
 		if (!philo_eat(philo))
-			break;
+			break ;
 		if (!philo_think(philo))
-			break;
+			break ;
 		if (!philo_sleep(philo))
-			break;
+			break ;
 	}
 	ft_putstr_fd("outside\n", STDOUT_FILENO);
 }

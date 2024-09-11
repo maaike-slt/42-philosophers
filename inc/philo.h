@@ -6,7 +6,7 @@
 /*   By: msloot <msloot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:56:14 by msloot            #+#    #+#             */
-/*   Updated: 2024/08/23 19:42:35 by msloot           ###   ########.fr       */
+/*   Updated: 2024/09/11 21:52:29 by msloot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,13 @@ bool	create_thread(const t_arg *arg);
 void	running_philo(t_philo *philo);
 
 ssize_t	ft_putstr_fd(const char *str, int fd);
-void	ft_putnbr_fd(int n, int fd);
+void	ft_putnbr_fd(size_t n, int fd);
 ssize_t	ft_puterr(const char *str);
 size_t	ft_strlen(const char *str);
 ssize_t	ft_aton(const char *nptr);
 bool	ft_isdigit(char c);
 bool	ft_isspace(char c);
 size_t	get_current_time(void);
+void	ft_msleep(size_t ms);
 
 #endif
