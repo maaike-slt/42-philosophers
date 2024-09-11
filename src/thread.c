@@ -6,7 +6,7 @@
 /*   By: msloot <msloot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:54:44 by msloot            #+#    #+#             */
-/*   Updated: 2024/08/23 19:31:28 by msloot           ###   ########.fr       */
+/*   Updated: 2024/09/11 22:03:29 by msloot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ bool	create_philo(const t_arg *arg, t_manager *manager, size_t i)
 {
 	manager->philo_array[i].manager = manager;
 	manager->philo_array[i].arg = arg;
-	manager->philo_array[i].index = i;
+	manager->philo_array[i].id = i + 1;
 	if (pthread_create(&(manager->thread_array[i]), NULL,
 			(void*)(void*)(running_philo), &(manager->philo_array[i])) != 0)
 	{

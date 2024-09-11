@@ -6,7 +6,7 @@
 /*   By: msloot <msloot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:56:14 by msloot            #+#    #+#             */
-/*   Updated: 2024/09/11 21:52:29 by msloot           ###   ########.fr       */
+/*   Updated: 2024/09/11 22:09:00 by msloot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@
 # include "ansi.h"
 
 # define PHILO_MAX	200
+
+# define ACTION_FORK	"has taken a fork"
+# define ACTION_EAT		"is eating"
+# define ACTION_SLEEP	"is sleeping"
+# define ACTION_THINK	"is thinking"
+# define ACTION_DIE		"died"
 
 typedef struct s_arg
 {
@@ -44,7 +50,7 @@ typedef struct s_manager
 
 typedef struct s_philo
 {
-	size_t			index;
+	size_t			id;
 	size_t			meals_eaten;
 	size_t			last_meal;
 	size_t			start_time;
@@ -65,5 +71,6 @@ bool	ft_isdigit(char c);
 bool	ft_isspace(char c);
 size_t	get_current_time(void);
 void	ft_msleep(size_t ms);
+void	ft_print_action(const t_philo *philo, const char *action);
 
 #endif
