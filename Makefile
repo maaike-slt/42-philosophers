@@ -6,7 +6,7 @@
 #    By: msloot <msloot@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 19:19:04 by msloot            #+#    #+#              #
-#    Updated: 2024/09/11 22:08:59 by msloot           ###   ########.fr        #
+#    Updated: 2024/09/12 11:14:26 by msloot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,7 @@ SRC_NAME =	main.c thread.c parse.c running_philo.c \
 			utils/ft_puterr.c utils/ft_strlen.c utils/ft_aton.c \
 			utils/ft_isspace.c utils/ft_isdigit.c utils/ft_putstr_fd.c \
 			utils/get_current_time.c utils/ft_putnbr_fd.c utils/ft_msleep.c \
-			utils/ft_print_action.c \
+			utils/ft_print_action.c utils/ft_free_2d.c \
 
 # SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))
 SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))

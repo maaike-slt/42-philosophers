@@ -6,7 +6,7 @@
 /*   By: msloot <msloot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:56:14 by msloot            #+#    #+#             */
-/*   Updated: 2024/09/11 22:09:00 by msloot           ###   ########.fr       */
+/*   Updated: 2024/09/12 11:13:58 by msloot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,6 @@ bool	ft_isspace(char c);
 size_t	get_current_time(void);
 void	ft_msleep(size_t ms);
 void	ft_print_action(const t_philo *philo, const char *action);
+void	ft_free_2d(void ***arr, size_t size);
 
 #endif
