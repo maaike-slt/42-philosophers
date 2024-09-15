@@ -6,7 +6,7 @@
 /*   By: msloot <msloot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:54:44 by msloot            #+#    #+#             */
-/*   Updated: 2024/09/12 11:18:45 by msloot           ###   ########.fr       */
+/*   Updated: 2024/09/15 16:21:28 by msloot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,13 @@ bool	create_thread(const t_arg *arg)
 	while (!manager.stop)
 		usleep(420);
 	write(1, "manager stopped\n", 16);
+	i = 0;
+	while (i < arg->philo_amt)
+	{
+		if (pthread_join(manager.thread_array[i], NULL))
+			return (false);
+		i++;
+	}
 	free(manager.thread_array);
 	free(manager.philo_array);
 	return (true);
