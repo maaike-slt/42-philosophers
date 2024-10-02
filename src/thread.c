@@ -6,7 +6,7 @@
 /*   By: msloot <msloot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:54:44 by msloot            #+#    #+#             */
-/*   Updated: 2024/09/15 16:21:28 by msloot           ###   ########.fr       */
+/*   Updated: 2024/10/02 21:30:46 by msloot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,37 +26,98 @@ bool	create_philo(const t_arg *arg, t_manager *manager, size_t i)
 	return (true);
 }
 
-bool	create_thread(const t_arg *arg)
+bool	manager_init(t_manager *manager, const t_arg *arg)
 {
-	size_t		i;
-	t_manager	manager;
+	ssize_t	i;
 
-	manager.stop = false;
-	manager.thread_array = (pthread_t *)malloc(sizeof(pthread_t)
-			* arg->philo_amt);
-	if (!manager.thread_array)
+	manager->stop = false;
+	manager->thread_array = NULL;
+	manager->fork_array = NULL;
+	manager->philo_array = NULL;
+	manager->philo_array = (t_philo *)malloc(sizeof(t_philo) * arg->philo_amt);
+	if (!manager->philo_array)
 		return (false);
-	manager.philo_array = (t_philo *)malloc(sizeof(t_philo) * arg->philo_amt);
-	if (!manager.philo_array)
+	manager->fork_array = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t)
+			* arg->philo_amt);
+	if (!manager->fork_array)
 		return (false);
 	i = 0;
-	while (i < arg->philo_amt)
+	while ((size_t)i < arg->philo_amt)
 	{
-		if (!create_philo(arg, &manager, i))
+		if (pthread_mutex_init(&(manager->fork_array[i]), NULL) != 0)
+		{
+			i--;
+			while (i >= 0)
+			{
+				pthread_mutex_destroy(&(manager->fork_array[i]));
+				i--;
+			}
+			free(manager->fork_array);
+			manager->fork_array = NULL;
 			return (false);
+		}
 		i++;
+	}
+	manager->thread_array = (pthread_t *)malloc(sizeof(pthread_t)
+			* arg->philo_amt);
+	if (!manager->thread_array)
+		return (false);
+	i = 0;
+	while ((size_t)i < arg->philo_amt)
+	{
+		if (!create_philo(arg, manager, i))
+		{
+			i--;
+			while (i >= 0)
+			{
+				pthread_join(manager->thread_array[i], NULL);
+				i--;
+			}
+			free(manager->thread_array);
+			manager->thread_array = NULL;
+			return (false);
+		}
+		i++;
+	}
+	return (true);
+}
+
+void	manager_free(t_manager *manager, const t_arg *arg)
+{
+	size_t	i;
+
+	i = 0;
+	while (manager->thread_array && i < arg->philo_amt)
+	{
+		pthread_join(manager->thread_array[i], NULL);
+		i++;
+	}
+	free(manager->thread_array);
+	manager->thread_array = NULL;
+	i = 0;
+	while (manager->fork_array && i < arg->philo_amt)
+	{
+		pthread_mutex_destroy(&(manager->fork_array[i]));
+		i++;
+	}
+	free(manager->fork_array);
+	manager->fork_array = NULL;
+	free(manager->philo_array);
+	manager->philo_array = NULL;
+}
+
+bool	create_thread(const t_arg *arg)
+{
+	t_manager	manager;
+
+	if (!manager_init(&manager, arg))
+	{
+		manager_free(&manager, arg);
+		return (false);
 	}
 	while (!manager.stop)
 		usleep(420);
 	write(1, "manager stopped\n", 16);
-	i = 0;
-	while (i < arg->philo_amt)
-	{
-		if (pthread_join(manager.thread_array[i], NULL))
-			return (false);
-		i++;
-	}
-	free(manager.thread_array);
-	free(manager.philo_array);
+	manager_free(&manager, arg);
 	return (true);
 }

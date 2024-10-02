@@ -6,7 +6,7 @@
 /*   By: msloot <msloot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:56:14 by msloot            #+#    #+#             */
-/*   Updated: 2024/09/12 11:13:58 by msloot           ###   ########.fr       */
+/*   Updated: 2024/10/02 20:41:02 by msloot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_arg
 typedef struct s_manager
 {
 	pthread_t		*thread_array;
+	pthread_mutex_t	*fork_array;
 	struct s_philo	*philo_array;
 	bool			stop;
 }					t_manager;
