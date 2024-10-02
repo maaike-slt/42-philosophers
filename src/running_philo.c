@@ -6,7 +6,7 @@
 /*   By: msloot <msloot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 14:24:47 by msloot            #+#    #+#             */
-/*   Updated: 2024/09/11 22:18:22 by msloot           ###   ########.fr       */
+/*   Updated: 2024/10/02 21:36:46 by msloot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,13 @@ static bool	philo_eat(t_philo *philo)
 {
 	if (must_stop(philo))
 		return (false);
+	//	lock both forks
+	//	print action for each fork taken
 	ft_print_action(philo, ACTION_EAT);
 	philo->meals_eaten++;
 	philo->last_meal = get_current_time();
 	ft_msleep(philo->arg->eat_time);
+	//	unlock both forks
 	return (true);
 }
 
