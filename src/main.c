@@ -6,13 +6,12 @@
 /*   By: msloot <msloot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 17:52:51 by msloot            #+#    #+#             */
-/*   Updated: 2024/10/02 21:36:48 by msloot           ###   ########.fr       */
+/*   Updated: 2024/10/03 19:32:21 by msloot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-// fix leaks
 // watch videos on mutex in C
 
 int	main(int argc, char *argv[])
