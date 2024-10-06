@@ -6,7 +6,7 @@
 /*   By: msloot <msloot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:54:44 by msloot            #+#    #+#             */
-/*   Updated: 2024/10/02 21:30:46 by msloot           ###   ########.fr       */
+/*   Updated: 2024/10/06 17:12:01 by msloot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,30 @@ bool	manager_init(t_manager *manager, const t_arg *arg)
 			while (i >= 0)
 			{
 				pthread_join(manager->thread_array[i], NULL);
+				i -= 2;
+			}
+			free(manager->thread_array);
+			manager->thread_array = NULL;
+			return (false);
+		}
+		i += 2;
+	}
+	i = 1;
+	while ((size_t)i < arg->philo_amt)
+	{
+		if (!create_philo(arg, manager, i))
+		{
+			i--;
+			while (i >= 0)
+			{
+				pthread_join(manager->thread_array[i], NULL);
 				i--;
 			}
 			free(manager->thread_array);
 			manager->thread_array = NULL;
 			return (false);
 		}
-		i++;
+		i += 2;
 	}
 	return (true);
 }

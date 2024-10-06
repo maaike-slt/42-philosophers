@@ -6,7 +6,7 @@
 /*   By: msloot <msloot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 14:24:47 by msloot            #+#    #+#             */
-/*   Updated: 2024/10/06 16:48:35 by msloot           ###   ########.fr       */
+/*   Updated: 2024/10/06 16:58:21 by msloot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static bool	philo_eat(t_philo *philo)
 	if (pthread_mutex_lock(&(philo->manager->fork_array[philo->id - 1])) != 0)
 		return (false);
 	if (must_stop(philo))
-		return(false);
+		return (false);
 	ft_print_action(philo, ACTION_FORK);
 	if (philo->id == 0)
 	{
@@ -65,7 +65,7 @@ static bool	philo_eat(t_philo *philo)
 			return (false);
 	}
 	if (must_stop(philo))
-		return(false);
+		return (false);
 	ft_print_action(philo, ACTION_FORK);
 	ft_print_action(philo, ACTION_EAT);
 	philo->meals_eaten++;
