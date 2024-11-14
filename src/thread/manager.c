@@ -6,7 +6,7 @@
 /*   By: msloot <msloot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 18:54:10 by msloot            #+#    #+#             */
-/*   Updated: 2024/10/06 19:10:51 by msloot           ###   ########.fr       */
+/*   Updated: 2024/11/14 18:39:19 by msloot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@ static bool	mutex_init(t_manager *manager, const t_arg *arg)
 
 bool	manager_init(t_manager *manager, const t_arg *arg)
 {
+	size_t	i;
+
+	i = 0;
 	manager->stop = false;
 	manager->thread_array = NULL;
 	manager->fork_array = NULL;
@@ -55,6 +58,11 @@ bool	manager_init(t_manager *manager, const t_arg *arg)
 			* arg->philo_amt);
 	if (!manager->thread_array)
 		return (false);
+	while (i < arg->philo_amt)
+	{
+		manager->thread_array[i] = 0;
+		i++;
+	}
 	if (!create_split_philo(manager, arg, false))
 		return (false);
 	if (!create_split_philo(manager, arg, true))
@@ -67,7 +75,9 @@ void	manager_free(t_manager *manager, const t_arg *arg)
 	size_t	i;
 
 	i = 0;
-	while (manager->thread_array && i < arg->philo_amt)
+	while (manager->thread_array
+		&& manager->thread_array[i] != 0
+		&& i < arg->philo_amt)
 	{
 		pthread_join(manager->thread_array[i], NULL);
 		i++;

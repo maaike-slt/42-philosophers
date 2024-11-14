@@ -6,7 +6,7 @@
 /*   By: msloot <msloot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 14:24:47 by msloot            #+#    #+#             */
-/*   Updated: 2024/10/06 16:58:21 by msloot           ###   ########.fr       */
+/*   Updated: 2024/11/14 18:53:21 by msloot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,42 +41,39 @@ static inline bool	must_stop(t_philo *philo)
 
 static bool	philo_eat(t_philo *philo)
 {
-	bool	first;
+	size_t	fork_index;
 
 	if (must_stop(philo))
 		return (false);
 	if (pthread_mutex_lock(&(philo->manager->fork_array[philo->id - 1])) != 0)
 		return (false);
 	if (must_stop(philo))
+	{
+		pthread_mutex_unlock(&(philo->manager->fork_array[philo->id - 1]));
 		return (false);
-	ft_print_action(philo, ACTION_FORK);
-	if (philo->id == 0)
-	{
-		first = true;
-		if (pthread_mutex_lock
-			(&(philo->manager->fork_array[philo->arg->philo_amt - 1])) != 0)
-			return (false);
 	}
+	ft_print_action(philo, ACTION_FORK);
+	if (philo->id == 1)
+		fork_index = philo->arg->philo_amt - 1;
 	else
+		fork_index = philo->id - 2;
+	if (pthread_mutex_lock(&(philo->manager->fork_array[fork_index])) != 0)
 	{
-		first = false;
-		if (pthread_mutex_lock
-			(&(philo->manager->fork_array[philo->id - 2])) != 0)
-			return (false);
+		pthread_mutex_unlock(&(philo->manager->fork_array[philo->id - 1]));
+		return (false);
 	}
 	if (must_stop(philo))
+	{
+		pthread_mutex_unlock(&(philo->manager->fork_array[fork_index]));
 		return (false);
+	}
 	ft_print_action(philo, ACTION_FORK);
 	ft_print_action(philo, ACTION_EAT);
 	philo->meals_eaten++;
 	philo->last_meal = get_current_time();
 	ft_msleep(philo->arg->eat_time);
 	pthread_mutex_unlock(&(philo->manager->fork_array[philo->id - 1]));
-	if (first == true)
-		pthread_mutex_unlock
-			(&(philo->manager->fork_array[philo->arg->philo_amt - 1]));
-	else
-		pthread_mutex_unlock(&(philo->manager->fork_array[philo->id - 2]));
+	pthread_mutex_unlock(&(philo->manager->fork_array[fork_index]));
 	return (true);
 }
 

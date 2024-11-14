@@ -6,7 +6,7 @@
 /*   By: msloot <msloot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 17:52:51 by msloot            #+#    #+#             */
-/*   Updated: 2024/10/03 19:32:21 by msloot           ###   ########.fr       */
+/*   Updated: 2024/10/08 13:50:42 by msloot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	main(int argc, char *argv[])
 		return (ft_puterr("wrong amount of arguments, 4 or 5 are needed\n"), 1);
 	if (!parse(argc, argv, &arg))
 		return (1);
+//	if (argv[1] == "1")
 	//	handle one philo
 	if (!create_thread(&arg))
 		return (1);
