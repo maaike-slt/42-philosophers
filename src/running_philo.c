@@ -6,7 +6,7 @@
 /*   By: msloot <msloot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 14:24:47 by msloot            #+#    #+#             */
-/*   Updated: 2024/11/14 18:53:21 by msloot           ###   ########.fr       */
+/*   Updated: 2025/02/16 13:40:16 by msloot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ static bool	philo_think(t_philo *philo)
 
 void	running_philo(t_philo *philo)
 {
-	write(1, "hello\n", 6);
+	ft_print_action(philo, "has been created");
 	philo->start_time = get_current_time();
 	philo->last_meal = get_current_time();
 	philo->meals_eaten = 0;

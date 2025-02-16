@@ -6,7 +6,7 @@
 /*   By: msloot <msloot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:54:44 by msloot            #+#    #+#             */
-/*   Updated: 2024/11/14 17:43:32 by msloot           ###   ########.fr       */
+/*   Updated: 2025/02/16 13:41:57 by msloot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ bool	create_split_philo(t_manager *manager, const t_arg *arg, bool even)
 {
 	ssize_t	i;
 
-	i = 0;
+	i = !even;
 	while ((size_t)i < arg->philo_amt)
 	{
 		if (!create_philo(arg, manager, i))
