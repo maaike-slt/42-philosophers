@@ -24,7 +24,7 @@ odd eats
 even thinks
 */
 
-static inline bool	must_stop(t_philo *philo)
+static bool	must_stop(t_philo *philo)
 {
 	if (pthread_mutex_lock(&(philo->manager->check_stop)) != 0)
 		return (true);
