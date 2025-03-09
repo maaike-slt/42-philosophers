@@ -6,7 +6,7 @@
 /*   By: msloot <msloot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:56:14 by msloot            #+#    #+#             */
-/*   Updated: 2025/03/09 17:16:54 by msloot           ###   ########.fr       */
+/*   Updated: 2025/03/09 17:37:37 by msloot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,9 @@ bool	create_split_philo(t_manager *manager, const t_arg *arg, bool even);
 void	running_philo(t_philo *philo);
 void	single_philo(t_arg *arg);
 
+bool	must_stop(t_philo *philo);
+bool	must_stop_raw(t_philo *philo);
+
 void	manager_free(t_manager *manager, const t_arg *arg);
 bool	manager_init(t_manager *manager, const t_arg *arg);
 
@@ -80,7 +83,8 @@ bool	ft_isdigit(char c);
 bool	ft_isspace(char c);
 size_t	get_current_time(void);
 void	ft_msleep(size_t ms);
-void	ft_print_action(const t_philo *philo, const char *action);
+bool	ft_print_action(t_philo *philo, const char *action);
+bool	ft_print_action_force(const t_philo *philo, const char *action);
 void	ft_print_action_raw(size_t id, const char *action);
 void	ft_free_2d(void ***arr, size_t size);
 

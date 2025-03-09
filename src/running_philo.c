@@ -6,7 +6,7 @@
 /*   By: msloot <msloot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 14:24:47 by msloot            #+#    #+#             */
-/*   Updated: 2025/03/09 16:37:28 by msloot           ###   ########.fr       */
+/*   Updated: 2025/03/09 17:36:33 by msloot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,28 +24,6 @@ odd eats
 even thinks
 */
 
-static bool	must_stop(t_philo *philo)
-{
-	if (pthread_mutex_lock(&(philo->manager->check_stop)) != 0)
-		return (true);
-	if (philo->manager->stop == 0)
-		return (pthread_mutex_unlock(&(philo->manager->check_stop)), true);
-	if (philo->arg->max_meal && philo->meals_eaten >= philo->arg->meal_amt)
-	{
-		if (philo->manager->stop != 0)
-			philo->manager->stop--;
-		return (pthread_mutex_unlock(&(philo->manager->check_stop)), true);
-	}
-	if (get_current_time() - philo->last_meal > philo->arg->die_time)
-	{
-		philo->manager->stop = 0;
-		ft_print_action(philo, ACTION_DIE);
-		return (pthread_mutex_unlock(&(philo->manager->check_stop)), true);
-	}
-	pthread_mutex_unlock(&(philo->manager->check_stop));
-	return (false);
-}
-
 static bool	philo_eat(t_philo *philo)
 {
 	size_t	fork_index;
@@ -54,12 +32,11 @@ static bool	philo_eat(t_philo *philo)
 		return (false);
 	if (pthread_mutex_lock(&(philo->manager->fork_array[philo->id - 1])) != 0)
 		return (false);
-	if (must_stop(philo))
+	if (!ft_print_action(philo, ACTION_FORK))
 	{
 		pthread_mutex_unlock(&(philo->manager->fork_array[philo->id - 1]));
 		return (false);
 	}
-	ft_print_action(philo, ACTION_FORK);
 	if (philo->id == 1)
 		fork_index = philo->arg->philo_amt - 1;
 	else
@@ -69,14 +46,13 @@ static bool	philo_eat(t_philo *philo)
 		pthread_mutex_unlock(&(philo->manager->fork_array[philo->id - 1]));
 		return (false);
 	}
-	if (must_stop(philo))
+	if (!ft_print_action(philo, ACTION_FORK)
+		|| !ft_print_action(philo, ACTION_EAT))
 	{
 		pthread_mutex_unlock(&(philo->manager->fork_array[philo->id - 1]));
 		pthread_mutex_unlock(&(philo->manager->fork_array[fork_index]));
 		return (false);
 	}
-	ft_print_action(philo, ACTION_FORK);
-	ft_print_action(philo, ACTION_EAT);
 	philo->meals_eaten++;
 	philo->last_meal = get_current_time();
 	ft_msleep(philo->arg->eat_time);
@@ -87,18 +63,16 @@ static bool	philo_eat(t_philo *philo)
 
 static bool	philo_sleep(t_philo *philo)
 {
-	if (must_stop(philo))
+	if (!ft_print_action(philo, ACTION_SLEEP))
 		return (false);
-	ft_print_action(philo, ACTION_SLEEP);
 	ft_msleep(philo->arg->sleep_time);
 	return (true);
 }
 
 static bool	philo_think(t_philo *philo)
 {
-	if (must_stop(philo))
+	if (!ft_print_action(philo, ACTION_THINK))
 		return (false);
-	ft_print_action(philo, ACTION_THINK);
 	return (true);
 }
 
@@ -106,7 +80,6 @@ void	running_philo(t_philo *philo)
 {
 	size_t	action;
 
-	ft_print_action(philo, "has been created");
 	bool (*action_list[ACTION_AMOUNT])(t_philo *);
 	action_list[0] = philo_eat;
 	action_list[1] = philo_think;
