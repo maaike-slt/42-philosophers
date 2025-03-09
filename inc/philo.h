@@ -6,7 +6,7 @@
 /*   By: msloot <msloot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:56:14 by msloot            #+#    #+#             */
-/*   Updated: 2025/03/09 14:37:11 by msloot           ###   ########.fr       */
+/*   Updated: 2025/03/09 14:51:59 by msloot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_manager
 	struct s_philo	*philo_array;
 	pthread_mutex_t	check_stop;
 	bool			stop;
+	pthread_mutex_t	print_lock;
 }					t_manager;
 
 typedef struct s_philo
@@ -79,6 +80,7 @@ bool	ft_isspace(char c);
 size_t	get_current_time(void);
 void	ft_msleep(size_t ms);
 void	ft_print_action(const t_philo *philo, const char *action);
+void	ft_print_action_raw(size_t id, const char *action);
 void	ft_free_2d(void ***arr, size_t size);
 
 #endif

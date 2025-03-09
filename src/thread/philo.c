@@ -6,7 +6,7 @@
 /*   By: msloot <msloot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:54:44 by msloot            #+#    #+#             */
-/*   Updated: 2025/03/09 14:35:45 by msloot           ###   ########.fr       */
+/*   Updated: 2025/03/09 15:03:49 by msloot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ bool	create_thread(const t_arg *arg)
 			break ;
 		}
 		pthread_mutex_unlock(&(manager.check_stop));
+		// check that all philosophers stopped
 		usleep(420);
 	}
 	write(1, "manager stopped\n", 16);

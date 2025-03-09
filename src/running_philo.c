@@ -6,7 +6,7 @@
 /*   By: msloot <msloot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 14:24:47 by msloot            #+#    #+#             */
-/*   Updated: 2025/03/09 14:33:06 by msloot           ###   ########.fr       */
+/*   Updated: 2025/03/09 15:03:15 by msloot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ static bool	philo_eat(t_philo *philo)
 	}
 	if (must_stop(philo))
 	{
+		pthread_mutex_unlock(&(philo->manager->fork_array[philo->id - 1]));
 		pthread_mutex_unlock(&(philo->manager->fork_array[fork_index]));
 		return (false);
 	}

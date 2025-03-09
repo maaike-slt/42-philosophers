@@ -6,18 +6,16 @@
 /*   By: msloot <msloot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 18:54:10 by msloot            #+#    #+#             */
-/*   Updated: 2025/03/09 14:04:58 by msloot           ###   ########.fr       */
+/*   Updated: 2025/03/09 14:47:43 by msloot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static bool	mutex_init(t_manager *manager, const t_arg *arg)
+static bool	mutex_fork_init(t_manager *manager, const t_arg *arg)
 {
 	ssize_t	i;
 
-	if (pthread_mutex_init(&(manager->check_stop), NULL) != 0)
-		return (false);
 	i = 0;
 	while ((size_t)i < arg->philo_amt)
 	{
@@ -32,11 +30,21 @@ static bool	mutex_init(t_manager *manager, const t_arg *arg)
 			free(manager->fork_array);
 			manager->fork_array = NULL;
 			pthread_mutex_destroy(&(manager->check_stop));
+			pthread_mutex_destroy(&(manager->print_lock));
 			return (false);
 		}
 		i++;
 	}
 	return (true);
+}
+
+static bool	mutex_init(t_manager *manager, const t_arg *arg)
+{
+	if (pthread_mutex_init(&(manager->check_stop), NULL) != 0)
+		return (false);
+	if (pthread_mutex_init(&(manager->print_lock), NULL) != 0)
+		return (false);
+	return (mutex_fork_init(manager, arg));
 }
 
 bool	manager_init(t_manager *manager, const t_arg *arg)
@@ -98,4 +106,5 @@ void	manager_free(t_manager *manager, const t_arg *arg)
 	free(manager->philo_array);
 	manager->philo_array = NULL;
 	pthread_mutex_destroy(&(manager->check_stop));
+	pthread_mutex_destroy(&(manager->print_lock));
 }
