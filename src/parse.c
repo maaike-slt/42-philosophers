@@ -6,7 +6,7 @@
 /*   By: msloot <msloot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 21:27:50 by msloot            #+#    #+#             */
-/*   Updated: 2024/07/27 19:47:27 by msloot           ###   ########.fr       */
+/*   Updated: 2025/03/09 13:38:41 by msloot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ static size_t	ft_aton_check(ssize_t n)
 {
 	if (n <= 0)
 	{
-		ft_puterr("one or more parameters have been assigned a number below 0, \
+		ft_puterr(\
+"one or more parameters have been assigned a number below or equal to 0, \
 only positive numbers allowed\n");
 		return (0);
 	}

@@ -6,7 +6,7 @@
 /*   By: msloot <msloot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 18:54:10 by msloot            #+#    #+#             */
-/*   Updated: 2024/11/14 18:39:19 by msloot           ###   ########.fr       */
+/*   Updated: 2025/03/09 14:04:58 by msloot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static bool	mutex_init(t_manager *manager, const t_arg *arg)
 {
 	ssize_t	i;
 
+	if (pthread_mutex_init(&(manager->check_stop), NULL) != 0)
+		return (false);
 	i = 0;
 	while ((size_t)i < arg->philo_amt)
 	{
@@ -29,6 +31,7 @@ static bool	mutex_init(t_manager *manager, const t_arg *arg)
 			}
 			free(manager->fork_array);
 			manager->fork_array = NULL;
+			pthread_mutex_destroy(&(manager->check_stop));
 			return (false);
 		}
 		i++;
@@ -94,4 +97,5 @@ void	manager_free(t_manager *manager, const t_arg *arg)
 	manager->fork_array = NULL;
 	free(manager->philo_array);
 	manager->philo_array = NULL;
+	pthread_mutex_destroy(&(manager->check_stop));
 }

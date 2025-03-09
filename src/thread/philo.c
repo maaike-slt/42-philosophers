@@ -6,7 +6,7 @@
 /*   By: msloot <msloot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:54:44 by msloot            #+#    #+#             */
-/*   Updated: 2025/02/16 13:41:57 by msloot           ###   ########.fr       */
+/*   Updated: 2025/03/09 14:35:45 by msloot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,18 @@ bool	create_thread(const t_arg *arg)
 		manager_free(&manager, arg);
 		return (false);
 	}
-	while (!manager.stop)
+	while (true)
+	{
+		if (pthread_mutex_lock(&(manager.check_stop)) != 0)
+			break ;
+		if (manager.stop)
+		{
+			pthread_mutex_unlock(&(manager.check_stop));
+			break ;
+		}
+		pthread_mutex_unlock(&(manager.check_stop));
 		usleep(420);
+	}
 	write(1, "manager stopped\n", 16);
 	manager_free(&manager, arg);
 	return (true);

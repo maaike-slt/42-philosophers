@@ -6,7 +6,7 @@
 /*   By: msloot <msloot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:56:14 by msloot            #+#    #+#             */
-/*   Updated: 2024/10/06 19:10:08 by msloot           ###   ########.fr       */
+/*   Updated: 2025/03/09 14:37:11 by msloot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_manager
 	pthread_t		*thread_array;
 	pthread_mutex_t	*fork_array;
 	struct s_philo	*philo_array;
+	pthread_mutex_t	check_stop;
 	bool			stop;
 }					t_manager;
 
@@ -63,6 +64,7 @@ bool	parse(int argc, char *argv[], t_arg *arg);
 bool	create_thread(const t_arg *arg);
 bool	create_split_philo(t_manager *manager, const t_arg *arg, bool even);
 void	running_philo(t_philo *philo);
+void	single_philo(t_arg *arg);
 
 void	manager_free(t_manager *manager, const t_arg *arg);
 bool	manager_init(t_manager *manager, const t_arg *arg);

@@ -6,7 +6,7 @@
 /*   By: msloot <msloot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 14:24:47 by msloot            #+#    #+#             */
-/*   Updated: 2025/02/16 13:40:16 by msloot           ###   ########.fr       */
+/*   Updated: 2025/03/09 14:33:06 by msloot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,20 @@ even thinks
 
 static inline bool	must_stop(t_philo *philo)
 {
+	if (pthread_mutex_lock(&(philo->manager->check_stop)) != 0)
+		return (true);
 	if (philo->manager->stop == true)
-		return (true);
+		return (pthread_mutex_unlock(&(philo->manager->check_stop)), true);
 	if (philo->arg->max_meal && philo->meals_eaten >= philo->arg->meal_amt)
-		return (true);
+		return (pthread_mutex_unlock(&(philo->manager->check_stop)), true);
 	if (get_current_time() - philo->last_meal > philo->arg->die_time)
 	{
 		philo->manager->stop = true;
 		ft_print_action(philo, ACTION_DIE);
-		return (true);
+		return (pthread_mutex_unlock(&(philo->manager->check_stop)), true);
 	}
-	return (philo->manager->stop);
+	pthread_mutex_unlock(&(philo->manager->check_stop));
+	return (false);
 }
 
 static bool	philo_eat(t_philo *philo)

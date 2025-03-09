@@ -1,19 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_action.c                                  :+:      :+:    :+:   */
+/*   single_philo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msloot <msloot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/11 22:01:47 by msloot            #+#    #+#             */
-/*   Updated: 2025/03/09 14:37:28 by msloot           ###   ########.fr       */
+/*   Created: 2025/03/09 13:27:54 by msloot            #+#    #+#             */
+/*   Updated: 2025/03/09 13:44:26 by msloot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	ft_print_action(const t_philo *philo, const char *action)
+void	single_philo(t_arg *arg)
 {
-	// FIXME: must lock before printing, and unlock after
-	printf("%zu %zu %s\n", get_current_time(), philo->id, action);
+	t_philo	p;
+
+	p.id = 1;
+	ft_msleep(arg->die_time);
+	ft_print_action(&p, ACTION_DIE);
 }

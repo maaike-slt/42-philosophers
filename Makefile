@@ -6,7 +6,7 @@
 #    By: msloot <msloot@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 19:19:04 by msloot            #+#    #+#              #
-#    Updated: 2024/10/06 19:06:05 by msloot           ###   ########.fr        #
+#    Updated: 2025/03/09 13:29:23 by msloot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ SRC_PATH =	./src/
 OBJ_PATH =	./obj/
 INC =		./inc/
 
-SRC_NAME =	main.c parse.c running_philo.c \
+SRC_NAME =	main.c parse.c running_philo.c single_philo.c \
 			thread/philo.c thread/manager.c \
 			utils/ft_puterr.c utils/ft_strlen.c utils/ft_aton.c \
 			utils/ft_isspace.c utils/ft_isdigit.c utils/ft_putstr_fd.c \
@@ -63,7 +63,7 @@ OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))
 
 define	progress_bar
 	i=0
-	while [[ $$i -le $(words $(SRC_NAME) m m) ]] ; do \
+	while [[ $$i -le $(words $(SRC_NAME)) ]] ; do \
 		printf " " ; \
 		((i = i + 1)) ; \
 	done
