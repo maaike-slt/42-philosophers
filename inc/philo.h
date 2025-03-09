@@ -6,7 +6,7 @@
 /*   By: msloot <msloot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:56:14 by msloot            #+#    #+#             */
-/*   Updated: 2025/03/09 14:51:59 by msloot           ###   ########.fr       */
+/*   Updated: 2025/03/09 16:29:51 by msloot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 
 # define PHILO_MAX	200
 
+# define ACTION_AMOUNT	3
 # define ACTION_FORK	"has taken a fork"
 # define ACTION_EAT		"is eating"
 # define ACTION_SLEEP	"is sleeping"
@@ -47,7 +48,7 @@ typedef struct s_manager
 	pthread_mutex_t	*fork_array;
 	struct s_philo	*philo_array;
 	pthread_mutex_t	check_stop;
-	bool			stop;
+	size_t			stop;
 	pthread_mutex_t	print_lock;
 }					t_manager;
 

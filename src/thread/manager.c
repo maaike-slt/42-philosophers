@@ -6,7 +6,7 @@
 /*   By: msloot <msloot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 18:54:10 by msloot            #+#    #+#             */
-/*   Updated: 2025/03/09 14:47:43 by msloot           ###   ########.fr       */
+/*   Updated: 2025/03/09 16:12:57 by msloot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ bool	manager_init(t_manager *manager, const t_arg *arg)
 	size_t	i;
 
 	i = 0;
-	manager->stop = false;
+	manager->stop = arg->philo_amt;
 	manager->thread_array = NULL;
 	manager->fork_array = NULL;
 	manager->philo_array = NULL;

@@ -6,7 +6,7 @@
 /*   By: msloot <msloot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 14:24:47 by msloot            #+#    #+#             */
-/*   Updated: 2025/03/09 15:03:15 by msloot           ###   ########.fr       */
+/*   Updated: 2025/03/09 16:37:28 by msloot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,17 @@ static inline bool	must_stop(t_philo *philo)
 {
 	if (pthread_mutex_lock(&(philo->manager->check_stop)) != 0)
 		return (true);
-	if (philo->manager->stop == true)
+	if (philo->manager->stop == 0)
 		return (pthread_mutex_unlock(&(philo->manager->check_stop)), true);
 	if (philo->arg->max_meal && philo->meals_eaten >= philo->arg->meal_amt)
+	{
+		if (philo->manager->stop != 0)
+			philo->manager->stop--;
 		return (pthread_mutex_unlock(&(philo->manager->check_stop)), true);
+	}
 	if (get_current_time() - philo->last_meal > philo->arg->die_time)
 	{
-		philo->manager->stop = true;
+		philo->manager->stop = 0;
 		ft_print_action(philo, ACTION_DIE);
 		return (pthread_mutex_unlock(&(philo->manager->check_stop)), true);
 	}
@@ -100,18 +104,22 @@ static bool	philo_think(t_philo *philo)
 
 void	running_philo(t_philo *philo)
 {
+	size_t	action;
+
 	ft_print_action(philo, "has been created");
+	bool (*action_list[ACTION_AMOUNT])(t_philo *);
+	action_list[0] = philo_eat;
+	action_list[1] = philo_think;
+	action_list[2] = philo_sleep;
 	philo->start_time = get_current_time();
 	philo->last_meal = get_current_time();
 	philo->meals_eaten = 0;
+	action = (philo->id % 2) * (ACTION_AMOUNT - 1);
 	while (true)
 	{
-		if (!philo_eat(philo))
+		if (!(action_list[action](philo)))
 			break ;
-		if (!philo_think(philo))
-			break ;
-		if (!philo_sleep(philo))
-			break ;
+		action = (action + 1) % ACTION_AMOUNT;
 	}
 	ft_putstr_fd("outside\n", STDOUT_FILENO);
 }
