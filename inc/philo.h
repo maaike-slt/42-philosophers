@@ -6,7 +6,7 @@
 /*   By: msloot <msloot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:56:14 by msloot            #+#    #+#             */
-/*   Updated: 2025/03/09 17:37:37 by msloot           ###   ########.fr       */
+/*   Updated: 2025/03/15 00:30:04 by msloot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include "ansi.h"
 
 # define PHILO_MAX	200
+# define MICRO_TIME 995
 
 # define ACTION_AMOUNT	3
 # define ACTION_FORK	"has taken a fork"
