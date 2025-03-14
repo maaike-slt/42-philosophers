@@ -6,7 +6,7 @@
 /*   By: msloot <msloot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:54:44 by msloot            #+#    #+#             */
-/*   Updated: 2025/03/09 16:57:40 by msloot           ###   ########.fr       */
+/*   Updated: 2025/03/14 21:59:07 by msloot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ bool	create_thread(const t_arg *arg)
 		manager_free(&manager, arg);
 		return (false);
 	}
-	write(1, "manager stopped\n", 16);
 	manager_free(&manager, arg);
 	return (true);
 }

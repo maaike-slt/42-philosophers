@@ -6,7 +6,7 @@
 /*   By: msloot <msloot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 18:54:10 by msloot            #+#    #+#             */
-/*   Updated: 2025/03/09 16:12:57 by msloot           ###   ########.fr       */
+/*   Updated: 2025/03/14 23:47:22 by msloot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,8 @@ static bool	mutex_init(t_manager *manager, const t_arg *arg)
 	return (mutex_fork_init(manager, arg));
 }
 
-bool	manager_init(t_manager *manager, const t_arg *arg)
+static bool	manager_malloc(t_manager *manager, const t_arg *arg)
 {
-	size_t	i;
-
-	i = 0;
-	manager->stop = arg->philo_amt;
 	manager->thread_array = NULL;
 	manager->fork_array = NULL;
 	manager->philo_array = NULL;
@@ -68,6 +64,17 @@ bool	manager_init(t_manager *manager, const t_arg *arg)
 	manager->thread_array = (pthread_t *)malloc(sizeof(pthread_t)
 			* arg->philo_amt);
 	if (!manager->thread_array)
+		return (false);
+	return (true);
+}
+
+bool	manager_init(t_manager *manager, const t_arg *arg)
+{
+	size_t	i;
+
+	i = 0;
+	manager->stop = arg->philo_amt;
+	if (!manager_malloc(manager, arg))
 		return (false);
 	while (i < arg->philo_amt)
 	{

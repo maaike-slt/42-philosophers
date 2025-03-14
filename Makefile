@@ -6,7 +6,7 @@
 #    By: msloot <msloot@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 19:19:04 by msloot            #+#    #+#              #
-#    Updated: 2025/03/09 17:26:22 by msloot           ###   ########.fr        #
+#    Updated: 2025/03/14 23:43:21 by msloot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,8 @@ RM = 	rm -rf
 
 CFLAGS =	-Wall -Werror -Wextra
 CFLAGS +=	-pthread
-CFLAGS +=	-O2
-# CFLAGS +=	-g
+# CFLAGS +=	-O2
+CFLAGS +=	-g
 # CFLAGS +=	-fsanitize=address
 
 # **************************************************************************** #
