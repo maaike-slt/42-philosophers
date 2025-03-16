@@ -6,7 +6,7 @@
 /*   By: msloot <msloot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 21:46:02 by msloot            #+#    #+#             */
-/*   Updated: 2025/03/15 00:30:28 by msloot           ###   ########.fr       */
+/*   Updated: 2025/03/16 17:52:18 by msloot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 inline void	ft_msleep(size_t ms)
 {
-	usleep(ms * MICRO_TIME);
+	usleep(ms * 1000);
 }
