@@ -6,7 +6,7 @@
 /*   By: msloot <msloot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 14:24:47 by msloot            #+#    #+#             */
-/*   Updated: 2025/03/16 18:38:55 by msloot           ###   ########.fr       */
+/*   Updated: 2025/03/17 18:15:06 by msloot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,9 @@ static bool	philo_eat(t_philo *philo)
 {
 	size_t	first_fork;
 	size_t	second_fork;
-	size_t	start;
+	// size_t	start;
 
-	ft_putnbr_fd(philo->arg->eat_time, STDOUT_FILENO);
-	ft_putstr_fd("\n", STDOUT_FILENO);
-	start = get_current_time();
+	// start = get_current_time();
 	if (must_stop(philo))
 		return (false);
 	if (philo->id == 1)
@@ -59,14 +57,14 @@ static bool	philo_eat(t_philo *philo)
 	}
 	if (!handle_lock(philo, first_fork, second_fork))
 		return (false);
+	if (must_stop(philo))
+		return (false);
+	// ft_msleep(philo->arg->eat_time - (get_current_time() - start));
 	philo->meals_eaten++;
 	philo->last_meal = get_current_time();
-	// ft_msleep(philo->arg->eat_time);
-	ft_msleep(philo->arg->eat_time - (get_current_time() - start));
+	ft_msleep(philo->arg->eat_time); 	// - philo.id * 10
 	pthread_mutex_unlock(&(philo->manager->fork_array[second_fork]));
-	ft_print_action_raw(philo->id, "unlocked second fork");
 	pthread_mutex_unlock(&(philo->manager->fork_array[first_fork]));
-	ft_print_action_raw(philo->id, "unlocked first fork");
 	return (true);
 }
 
